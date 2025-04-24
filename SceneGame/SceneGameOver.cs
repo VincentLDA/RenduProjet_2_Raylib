@@ -13,6 +13,7 @@ namespace Projet_S.SceneGame
         private Texture2D btnIcons = Raylib.LoadTexture("assets/ui/Icons/Refresh.png");
 
         static IScoreController scoreController = ServicesLocator.Get<IScoreController>();
+        static IHightScoreController hightScoreController = ServicesLocator.Get<IHightScoreController>();
 
         private string GameOver_TXT = "GAME OVER";
         private int fontSize = 40;
@@ -21,9 +22,13 @@ namespace Projet_S.SceneGame
 
         private ButtonTexture btnRestart;
 
+        List<int> HgScore = new List<int>();
+
         public SceneGameOver()
         {
             btnRestart = new ButtonTexture(restart, button, buttonOver, btnIcons);
+            hightScoreController.UpdateScores(scoreController.GetScore());
+            HgScore = hightScoreController.LoadScores();
         }
 
         public override void Draw()
@@ -45,6 +50,8 @@ namespace Projet_S.SceneGame
             int Y_BtnRestart = (int)(Y_TxtScore + txtScoreSize.Y + Spacing);
             btnRestart.Y = Y_BtnRestart;
             btnRestart.Draw();
+
+            hightScoreController.Print(HgScore, 50, 150);
         }
 
         public override void Load()

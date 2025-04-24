@@ -11,6 +11,7 @@ class Program
 
     static public SceneManager _sceneManager = new();
     static private Score score = new();
+    static private HightScore hg = new();
     public static int widthScreen = 1500;
     public static int heightScreen = 900;
 

@@ -57,13 +57,13 @@ namespace Projet_S.Component.PNJ
                 if (coordinates.Equals(body.Last()))
                 {
                     textureDraw = textureHead;
-                    Raylib.DrawRectangle((int)pos.X, (int)pos.Y, grid.cellSize, grid.cellSize, Color.Magenta);
+                    //Raylib.DrawRectangle((int)pos.X, (int)pos.Y, grid.cellSize, grid.cellSize, Color.Magenta);
                 }
 
                 if (coordinates.Equals(body.First()))
                 {
                     textureDraw = textureHead;
-                    Raylib.DrawRectangle((int)pos.X, (int)pos.Y, grid.cellSize, grid.cellSize, Color.Beige);
+                    //Raylib.DrawRectangle((int)pos.X, (int)pos.Y, grid.cellSize, grid.cellSize, Color.Beige);
                 }
 
                 if (coordinates.Equals(body.Last()))

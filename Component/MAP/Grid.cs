@@ -7,6 +7,8 @@ namespace Projet_S.Component.MAP
 
     public class Grid
     {
+        public Color colorCase1 { get; set; } = Color.Brown;
+        public Color colorCase2 { get; set; } = Color.DarkBrown;
 
         public List<MapBinding> mapBindings { get; private set; }
 
@@ -47,15 +49,19 @@ namespace Projet_S.Component.MAP
                 for (int row = 0; row < rows; row++) {
                     Coordinates coordinates = new(column, row);
                     Vector2 pos = GridToWorld(new(column, row));
-                    Raylib.DrawRectangleLines((int)pos.X, (int)pos.Y, cellSize, cellSize, Color.White);
 
 
                     MapBinding mapBinding = MapBinding.GetMapBinding(mapBindings, coordinates);
                     if (mapBinding != null)
                     {
                         Raylib.DrawTexture(mapBinding.texture, (int)(pos.X), (int)(pos.Y), Color.White);
+                    } else
+                    {
+                        Color cellColor = ((pos.X + pos.Y) % 2 == 0) ? colorCase1 : colorCase2;
+                        Raylib.DrawRectangle((int)(pos.X), (int)(pos.Y), cellSize, cellSize, cellColor);
                     }
-                   
+
+                    Raylib.DrawRectangleLines((int)pos.X, (int)pos.Y, cellSize, cellSize, Color.White);
 
                 }
             }
@@ -66,7 +72,17 @@ namespace Projet_S.Component.MAP
             return pCoordinates.columns >= 0 && pCoordinates.rows >= 0 && pCoordinates.columns < columns && pCoordinates.rows < rows;
         }
 
-
+        private void DrawCheckerboardBackground(int cellSize, int cols, int rows, Color color1, Color color2)
+        {
+            for (int y = 0; y < rows; y++)
+            {
+                for (int x = 0; x < cols; x++)
+                {
+                    Color cellColor = ((x + y) % 2 == 0) ? color1 : color2;
+                    Raylib.DrawRectangle(x * cellSize, y * cellSize, cellSize, cellSize, cellColor);
+                }
+            }
+        }
     }
 
 

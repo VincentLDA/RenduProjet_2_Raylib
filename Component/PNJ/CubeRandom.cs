@@ -102,6 +102,7 @@ namespace Projet_S.Component.PNJ
             di_cubeRandomBonus.Add(CubeRandomBonus.WAITING, "");
             di_cubeRandomBonus.Add(CubeRandomBonus.SCORE_50, "Bonus de 50 PTS");
             di_cubeRandomBonus.Add(CubeRandomBonus.SCORE_10, "Bonus de 10 PTS");
+            di_cubeRandomBonus.Add(CubeRandomBonus.GROW, "Grow");
         }
 
         public void increaseLuck()
@@ -137,6 +138,11 @@ namespace Projet_S.Component.PNJ
             else if (this.CubeRandomBonus == CubeRandomBonus.SCORE_50)
             {
                 scoreController.AddScore(50);
+                CubeRandomBonus = CubeRandomBonus.WAITING;
+            }
+            else if (this.CubeRandomBonus == CubeRandomBonus.GROW)
+            {
+                snake.Grow();
                 CubeRandomBonus = CubeRandomBonus.WAITING;
             }
         }

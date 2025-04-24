@@ -11,6 +11,6 @@ namespace Projet_S.Enums
         WAITING,
         SCORE_50,
         SCORE_10,
-
+        GROW
     }
 }

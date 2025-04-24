@@ -18,7 +18,9 @@ namespace Projet_S.SceneGame
         private CubeRandom cubeRandom;
 
         static IScoreController scoreController = ServicesLocator.Get<IScoreController>();
+        static IHightScoreController hightScoreController = ServicesLocator.Get<IHightScoreController>();
 
+        List<int> HgScore = new List<int>();
 
         private GameTimer gameTimer;
         private GameTimer gameOverTimer;
@@ -31,7 +33,8 @@ namespace Projet_S.SceneGame
             cubeRandom = new CubeRandom(grid, snake, apple);
             apple = new Apple(grid,snake, cubeRandom);
 
-            
+            HgScore = hightScoreController.LoadScores();
+
         }
          
         public override void Load()
@@ -64,7 +67,9 @@ namespace Projet_S.SceneGame
                 Raylib.DrawText($"Apparition de bonus :", 20, 150, 35, Color.White);
                 Raylib.DrawText($"{cubeRandom.spawnLuck}%", 140, 200, 35, Color.White);
             }
-                
+
+            hightScoreController.Print(HgScore, (int)grid.position.X + grid.cellSize * grid.columns + 90, 150);
+
         }        
 
         public override void Update()
@@ -122,5 +127,7 @@ namespace Projet_S.SceneGame
             if (Raylib.IsKeyDown(KeyboardKey.D)) direction = Coordinates.right;
             return direction;
         }
+
+
     }
 }
